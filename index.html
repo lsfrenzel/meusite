@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f4">
+  <meta name="description" content="Lucas Shimada Frenzel — Instrutor de Educação Profissional no SENAI, com atuação em desenvolvimento de software e jogos, computação em nuvem, inteligência artificial e pesquisa científica.">
+  <meta property="og:title" content="Lucas Shimada Frenzel — Tecnologia, educação e pesquisa">
+  <meta property="og:description" content="Instrutor técnico, desenvolvedor e pesquisador. Educação profissional, software, jogos digitais, cloud computing e IA.">
+  <meta property="og:type" content="profile">
+  <title>Lucas Shimada Frenzel — Tecnologia, educação e pesquisa</title>
+  <style>
+    :root {
+      --red: #ff0000;
+      --blue: #0000ff;
+      --yellow: #ffff00;
+      --ink: #171717;
+      --paper: #f7f7f4;
+      --white: #ffffff;
+      --muted: #686868;
+      --line: #1f1f1f;
+      --soft-line: #d7d7d2;
+      --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Helvetica, Arial, sans-serif;
+      --max: 1280px;
+      --gutter: clamp(1.25rem, 4vw, 3rem);
+      --section-space: clamp(4.5rem, 8vw, 7.5rem);
+      --ease: cubic-bezier(.2,.75,.25,1);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; overflow-x: clip; }
+    body { overflow-x: clip; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--sans); font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    body.menu-open { overflow: hidden; }
+    a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .22em; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 4px; }
+    button { font: inherit; }
+    ::selection { background: var(--yellow); color: var(--ink); }
+    .skip-link { position: fixed; z-index: 600; top: .75rem; left: .75rem; padding: .7rem 1rem; background: var(--yellow); color: var(--ink); transform: translateY(-160%); border: 2px solid var(--ink); }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(100% - (var(--gutter) * 2), var(--max)); margin-inline: auto; }
+    .eyebrow { display: inline-flex; gap: .65rem; align-items: center; font: 700 .75rem/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase; }
+    .eyebrow::before { content: ""; display: inline-block; width: 1.75rem; height: .35rem; background: var(--red); }
+    .mono { font-family: var(--mono); }
+    .muted { color: var(--muted); }
+    .rule { height: 2px; width: 100%; background: var(--ink); }
+
+    /* Navigation */
+    .site-header { position: sticky; top: 0; z-index: 100; background: rgba(247,247,244,.96); border-bottom: 2px solid var(--ink); backdrop-filter: blur(12px); }
+    .nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .brand { display: inline-flex; align-items: center; gap: .75rem; text-decoration: none; font-weight: 800; line-height: 1.05; letter-spacing: -.035em; }
+    .brand-mark { width: 38px; height: 38px; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 3px; flex: 0 0 auto; }
+    .brand-mark span:nth-child(1) { background: var(--red); }
+    .brand-mark span:nth-child(2) { background: var(--blue); }
+    .brand-mark span:nth-child(3) { background: var(--yellow); grid-column: 1 / 3; }
+    .brand-text small { display: block; margin-top: .28rem; color: var(--muted); font: 500 .58rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; justify-content: flex-end; gap: clamp(.8rem, 2vw, 1.6rem); }
+    .nav-links a { position: relative; padding: .5rem 0; font-size: .83rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .nav-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: .18rem; height: 3px; background: var(--red); transition: right .22s var(--ease); }
+    .nav-links a:hover::after, .nav-links a[aria-current="location"]::after { right: 0; }
+    .nav-cta { display: inline-flex; align-items: center; gap: .5rem; padding: .72rem .95rem; background: var(--yellow); border: 1.5px solid var(--ink); border-radius: 6px; font-size: .78rem; font-weight: 800; text-decoration: none; white-space: nowrap; transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .menu-toggle { display: none; width: 44px; height: 44px; border: 2px solid var(--ink); border-radius: 6px; background: var(--white); color: var(--ink); cursor: pointer; }
+    .menu-toggle svg { width: 22px; height: 22px; vertical-align: middle; }
+
+    /* Hero */
+    .hero { min-height: min(780px, calc(100svh - 76px)); padding-block: clamp(3rem, 7vw, 6rem) clamp(4.5rem, 7vw, 6.5rem); display: flex; align-items: center; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1.14fr) minmax(340px, .86fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero-copy .eyebrow { margin-bottom: 1.6rem; }
+    h1 { max-width: 800px; margin: 0; font-size: clamp(3.1rem, 6.2vw, 6.2rem); line-height: .94; font-weight: 800; letter-spacing: -.075em; }
+    h1 .name-highlight { display: inline; text-decoration: underline; text-decoration-color: var(--red); text-decoration-thickness: .075em; text-underline-offset: .12em; }
+    .hero-role { max-width: 650px; margin: 1.6rem 0 0; font-size: clamp(1.1rem, 1.75vw, 1.42rem); line-height: 1.4; font-weight: 600; letter-spacing: -.025em; }
+    .hero-summary { max-width: 600px; margin: 1.25rem 0 0; color: #4d4d4d; line-height: 1.75; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .85rem; margin-top: 2rem; }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: .65rem; min-height: 48px; padding: .8rem 1.05rem; border: 1.5px solid var(--ink); border-radius: 6px; font-size: .88rem; font-weight: 750; text-decoration: none; cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s var(--ease), background-color .2s var(--ease); }
+    .button svg { width: 17px; height: 17px; flex: 0 0 auto; }
+    .button-primary { color: var(--ink); background: var(--red); }
+    .button-secondary { background: transparent; }
+    .button:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .button:active { transform: translateY(-1px); }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2.25rem; padding-top: 1.1rem; border-top: 1px solid var(--soft-line); color: var(--muted); font: 500 .74rem/1.5 var(--mono); }
+    .hero-meta span { display: inline-flex; align-items: center; gap: .55rem; }
+    .hero-meta svg { width: 15px; height: 15px; color: var(--ink); }
+    .hero-art { position: relative; min-height: 480px; max-height: 600px; aspect-ratio: .9; border: 2px solid var(--ink); background: var(--white); display: grid; grid-template-columns: 1.1fr .75fr .8fr; grid-template-rows: 1fr .7fr .8fr 1fr; gap: 8px; padding: 12px; overflow: hidden; }
+    .art-cell { border: 2px solid var(--ink); min-width: 0; }
+    .art-red { grid-column: 1 / 3; grid-row: 1 / 3; background: var(--red); }
+    .art-blue { grid-column: 3; grid-row: 1; background: var(--blue); }
+    .art-white { grid-column: 3; grid-row: 2 / 4; background: var(--white); }
+    .art-yellow { grid-column: 1; grid-row: 3 / 5; background: var(--yellow); }
+    .art-ink { grid-column: 2; grid-row: 3; background: var(--ink); }
+    .art-open { grid-column: 2 / 4; grid-row: 4; background: #e9e9e4; position: relative; }
+    .art-initials { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: clamp(3.8rem, 7vw, 6rem); line-height: 1; font-weight: 800; letter-spacing: -.1em; }
+    .art-caption { position: absolute; right: 1rem; top: 1rem; z-index: 2; writing-mode: vertical-rl; font: 700 .68rem/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
+    .art-index { position: absolute; bottom: 1.05rem; left: 1.1rem; z-index: 2; font: 700 .68rem/1.4 var(--mono); }
+    .art-corner { position: absolute; top: 0; right: 0; width: 30%; height: 18%; background: var(--yellow); border-left: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .hero-note { position: absolute; bottom: -1.1rem; right: -1rem; padding: .7rem 1rem; max-width: 185px; background: var(--yellow); border: 2px solid var(--ink); font: 700 .72rem/1.45 var(--mono); text-transform: uppercase; transform: rotate(2deg); }
+
+    /* General sections */
+    .section { padding-block: var(--section-space); border-top: 2px solid var(--ink); }
+    .section-head { display: grid; grid-template-columns: minmax(160px, .48fr) minmax(0, 1.52fr); gap: 2rem; align-items: start; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+    .section-head .eyebrow { margin-top: .55rem; }
+    h2 { margin: 0; max-width: 850px; font-size: clamp(2rem, 4.3vw, 4.1rem); line-height: 1.02; font-weight: 800; letter-spacing: -.065em; }
+    .section-intro { max-width: 720px; margin: 1rem 0 0; font-size: 1.04rem; color: #4d4d4d; }
+    .about-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; }
+    .about-copy p { max-width: 70ch; margin: 0 0 1.1rem; color: #454545; }
+    .about-copy p:first-child { color: var(--ink); font-size: clamp(1.18rem, 1.7vw, 1.45rem); font-weight: 600; line-height: 1.55; letter-spacing: -.02em; }
+    .about-facts { display: grid; grid-template-columns: 1fr 1fr; border-top: 2px solid var(--ink); border-left: 2px solid var(--ink); }
+    .fact { min-height: 140px; padding: 1.15rem; border-right: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
+    .fact:nth-child(2) { background: var(--yellow); }
+    .fact:nth-child(3) { background: var(--red); }
+    .fact:nth-child(4) { background: var(--blue); color: var(--white); }
+    .fact-num { display: block; font-size: clamp(2rem, 3vw, 3rem); line-height: 1.1; font-weight: 800; letter-spacing: -.06em; }
+    .fact-label { display: block; margin-top: .6rem; font: 700 .68rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: .02em; }
+    .fact-note { display: block; margin-top: .4rem; font-size: .78rem; line-height: 1.4; }
+
+    /* Expertise */
+    .expertise-grid { display: grid; grid-template-columns: 1.12fr .88fr; gap: 1rem; align-items: stretch; }
+    .expertise-main { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .skill-card { position: relative; padding: clamp(1.2rem, 2vw, 1.8rem); background: var(--white); border: 1.5px solid var(--ink); border-radius: 6px; min-height: 210px; transition: transform .2s var(--ease), box-shadow .2s var(--ease); }
+    .skill-card:hover { transform: translateY(-3px); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .skill-card.featured { grid-column: 1 / 3; min-height: 230px; background: var(--yellow); }
+    .skill-card.blue { background: var(--blue); color: var(--white); }
+    .skill-card.red { background: var(--red); }
+    .skill-number { display: block; margin-bottom: 1.4rem; font: 700 .72rem/1 var(--mono); }
+    .skill-card h3 { margin: 0; font-size: clamp(1.2rem, 2vw, 1.65rem); line-height: 1.1; letter-spacing: -.04em; }
+    .skill-card p { margin: .8rem 0 0; max-width: 46ch; font-size: .9rem; }
+    .skill-card .tag-list { margin-top: 1.1rem; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: .45rem; padding: 0; margin: 1rem 0 0; list-style: none; }
+    .tag-list li { padding: .36rem .55rem; border: 1px solid currentColor; border-radius: 3px; font: 600 .69rem/1.35 var(--mono); }
+    .tool-panel { padding: clamp(1.2rem, 2.2vw, 2rem); background: #ecece6; border: 1.5px solid var(--ink); border-radius: 6px; }
+    .tool-panel h3 { margin: 0 0 .6rem; font-size: 1.55rem; letter-spacing: -.04em; line-height: 1.1; }
+    .tool-panel > p { color: #4d4d4d; font-size: .9rem; margin: 0 0 1.5rem; }
+    .tool-group { padding-block: 1rem; border-top: 1px solid #a9a9a2; }
+    .tool-group h4 { margin: 0 0 .65rem; font: 700 .72rem/1.35 var(--mono); text-transform: uppercase; letter-spacing: .03em; }
+    .tool-group .tag-list { margin-top: 0; }
+    .tool-group .tag-list li { border-color: #8a8a84; }
+
+    /* Work history */
+    .experience-list { border-top: 2px solid var(--ink); }
+    .experience-item { display: grid; grid-template-columns: minmax(150px, .48fr) minmax(0, 1.52fr); gap: 2rem; padding-block: 2rem; border-bottom: 1px solid #bcbcb5; }
+    .experience-date { font: 700 .72rem/1.6 var(--mono); text-transform: uppercase; letter-spacing: .02em; }
+    .experience-date span { display: block; color: var(--muted); margin-top: .35rem; font-weight: 500; text-transform: none; letter-spacing: 0; }
+    .experience-body { max-width: 840px; }
+    .experience-company { display: inline-flex; align-items: center; gap: .55rem; margin-bottom: .5rem; font: 700 .72rem/1.4 var(--mono); text-transform: uppercase; }
+    .experience-company::before { content: ""; width: 10px; height: 10px; background: var(--red); border: 1px solid var(--ink); }
+    .experience-item:nth-child(2n) .experience-company::before { background: var(--blue); }
+    .experience-item h3 { margin: 0; font-size: clamp(1.35rem, 2.5vw, 2rem); line-height: 1.12; letter-spacing: -.045em; }
+    .experience-location { color: var(--muted); margin: .45rem 0 1rem; font-size: .83rem; }
+    .experience-body p { margin: 0 0 .85rem; color: #454545; }
+    .experience-body ul { margin: .6rem 0 0; padding-left: 1.15rem; color: #454545; }
+    .experience-body li { padding-left: .3rem; margin: .35rem 0; }
+    .experience-body li::marker { color: var(--red); }
+    .experience-tags { display: flex; flex-wrap: wrap; gap: .45rem; padding: 0; margin: 1rem 0 0; list-style: none; }
+    .experience-tags li { font: 600 .66rem/1.4 var(--mono); padding: .25rem .45rem; background: #ededE7; border: 1px solid #c4c4bd; border-radius: 3px; }
+    .experience-details { margin-top: .8rem; }
+    .experience-details summary { width: fit-content; display: flex; gap: .5rem; align-items: center; cursor: pointer; font-size: .82rem; font-weight: 700; list-style: none; }
+    .experience-details summary::-webkit-details-marker { display: none; }
+    .experience-details summary::after { content: "+"; display: inline-grid; place-items: center; width: 22px; height: 22px; border: 1px solid var(--ink); border-radius: 50%; font-size: 1rem; line-height: 1; }
+    .experience-details[open] summary::after { content: "−"; }
+    .experience-details .detail-content { padding-top: .8rem; }
+
+    /* Projects and education */
+    .initiative-grid { display: grid; grid-template-columns: 1.1fr .9fr; grid-template-rows: auto auto; gap: 1rem; }
+    .initiative { min-height: 215px; padding: clamp(1.3rem, 2.5vw, 2rem); border: 1.5px solid var(--ink); border-radius: 6px; background: var(--white); }
+    .initiative:first-child { grid-row: span 2; background: var(--blue); color: var(--white); min-height: 440px; display: flex; flex-direction: column; justify-content: space-between; }
+    .initiative:nth-child(2) { background: var(--yellow); }
+    .initiative:nth-child(3) { background: #e7e7e1; }
+    .initiative-index { font: 700 .72rem/1.4 var(--mono); }
+    .initiative h3 { max-width: 520px; margin: 1.5rem 0 .7rem; font-size: clamp(1.45rem, 2.6vw, 2.2rem); line-height: 1.08; letter-spacing: -.05em; }
+    .initiative p { margin: 0; max-width: 55ch; font-size: .92rem; }
+    .initiative:first-child p { max-width: 48ch; }
+    .initiative-foot { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid currentColor; font: 600 .7rem/1.5 var(--mono); }
+    .education-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(250px, .85fr); gap: 2rem; align-items: start; }
+    .education-list { border-top: 2px solid var(--ink); }
+    .education-item { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 1rem; padding: 1.35rem 0; border-bottom: 1px solid #bcbcb5; }
+    .education-year { font: 700 .73rem/1.5 var(--mono); color: var(--muted); }
+    .education-item h3 { margin: 0; font-size: 1.2rem; line-height: 1.25; letter-spacing: -.025em; }
+    .education-item p { margin: .35rem 0 0; color: #525252; font-size: .88rem; }
+    .education-note { padding: 1.5rem; border: 2px solid var(--ink); background: var(--red); }
+    .education-note .note-symbol { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: 1.5rem; background: var(--yellow); border: 1.5px solid var(--ink); font: 800 1.2rem/1 var(--mono); }
+    .education-note h3 { margin: 0; font-size: 1.55rem; letter-spacing: -.04em; line-height: 1.12; }
+    .education-note p { margin: .8rem 0 0; font-size: .9rem; }
+    .cert-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 2rem; }
+    .award { padding: 1.5rem; background: var(--yellow); border: 1.5px solid var(--ink); }
+    .award .award-label { font: 700 .72rem/1.4 var(--mono); text-transform: uppercase; }
+    .award h3 { margin: 1.3rem 0 .75rem; font-size: clamp(1.5rem, 2.5vw, 2.25rem); line-height: 1.06; letter-spacing: -.045em; }
+    .award p { margin: 0; font-size: .9rem; }
+    .cert-list { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .cert { padding: 1rem; border: 1px solid var(--ink); background: var(--white); min-height: 125px; }
+    .cert::before { content: ""; display: block; width: 24px; height: 5px; margin-bottom: 1rem; background: var(--blue); }
+    .cert:nth-child(2n)::before { background: var(--red); }
+    .cert h3 { margin: 0; font-size: .98rem; line-height: 1.25; }
+    .cert p { margin: .45rem 0 0; color: var(--muted); font-size: .77rem; line-height: 1.45; }
+    .language-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; margin-top: 1rem; }
+    .language { padding: .9rem 1rem; border: 1px solid var(--ink); }
+    .language strong { display: block; font-size: .9rem; }
+    .language span { display: block; margin-top: .2rem; font-size: .75rem; color: var(--muted); }
+
+    /* Contact and footer */
+    .contact-section { padding-block: var(--section-space); background: var(--ink); color: var(--white); }
+    .contact-section .eyebrow::before { background: var(--yellow); }
+    .contact-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(260px, .8fr); gap: 3rem; align-items: end; }
+    .contact-section h2 { max-width: 780px; font-size: clamp(2.8rem, 6vw, 6rem); }
+    .contact-section .contact-copy { max-width: 600px; margin: 1.2rem 0 0; color: #d1d1cc; }
+    .contact-links { display: grid; gap: .75rem; }
+    .contact-link { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid #656565; color: var(--white); font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+    .contact-link svg { width: 18px; height: 18px; flex: 0 0 auto; }
+    .contact-link:hover { color: var(--yellow); }
+    .contact-email-tools { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.3rem; }
+    .contact-email-tools .button { border-color: var(--white); color: var(--white); background: transparent; }
+    .contact-email-tools .button:hover { color: var(--ink); background: var(--yellow); }
+    .site-footer { background: var(--ink); color: #bdbdb7; border-top: 1px solid #525252; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 1.5rem; align-items: center; padding-block: 1.25rem; font: 500 .7rem/1.5 var(--mono); }
+    .footer-mark { display: inline-flex; align-items: center; gap: .55rem; }
+    .footer-mark span { width: 10px; height: 10px; background: var(--red); display: inline-block; }
+    .back-top { position: fixed; right: 1rem; bottom: 1rem; z-index: 90; width: 44px; height: 44px; display: grid; place-items: center; background: var(--yellow); color: var(--ink); border: 1.5px solid var(--ink); border-radius: 6px; text-decoration: none; opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .2s, transform .2s; }
+    .back-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .back-top svg { width: 20px; height: 20px; }
+    .toast { position: fixed; left: 50%; bottom: 1.3rem; z-index: 500; padding: .8rem 1rem; background: var(--yellow); border: 1.5px solid var(--ink); color: var(--ink); font: 700 .8rem/1.3 var(--mono); box-shadow: 0 2px 8px rgba(0,0,0,.08); transform: translate(-50%, 10px); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+    .toast.visible { opacity: 1; transform: translate(-50%, 0); }
+
+    /* Motion */
+    .js-ready .reveal { opacity: 0; transform: translateY(16px); transition: opacity .42s var(--ease), transform .42s var(--ease); }
+    .js-ready .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .js-ready .reveal { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 1050px) {
+      .nav-links { gap: .85rem; }
+      .nav-links a { font-size: .76rem; }
+      .nav-cta { padding: .65rem .8rem; }
+      .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(290px, .78fr); gap: 2rem; }
+      .hero-art { min-height: 400px; }
+    }
+    @media (max-width: 900px) {
+      .nav-wrap { min-height: 70px; }
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-links { position: fixed; z-index: 200; inset: 72px 0 0; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 1rem var(--gutter) 2rem; background: var(--paper); border-top: 2px solid var(--ink); transform: translateX(100%); visibility: hidden; transition: transform .24s var(--ease), visibility .24s; overflow-y: auto; }
+      .nav-links.open { transform: translateX(0); visibility: visible; }
+      .nav-links a { padding: 1rem 0; border-bottom: 1px solid #c9c9c2; font-size: 1.1rem; }
+      .nav-links a::after { bottom: .65rem; right: 100%; max-width: 4rem; }
+      .nav-links .nav-cta { justify-content: center; margin-top: 1rem; border: 1.5px solid var(--ink); }
+      .hero { min-height: auto; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-art { min-height: 380px; max-height: 530px; aspect-ratio: 1.15; width: min(100%, 560px); margin: 1.2rem auto 0; }
+      .hero-note { right: .4rem; }
+      .section-head { grid-template-columns: 1fr; gap: 1rem; }
+      .about-grid, .education-grid, .contact-grid, .cert-layout { grid-template-columns: 1fr; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .tool-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.5rem; }
+      .tool-panel h3, .tool-panel > p { grid-column: 1 / -1; }
+      .experience-item { grid-template-columns: 150px minmax(0, 1fr); gap: 1.4rem; }
+      .initiative-grid { grid-template-columns: 1fr 1fr; }
+      .initiative:first-child { grid-column: 1 / -1; grid-row: auto; min-height: 300px; }
+      .contact-grid { gap: 2rem; }
+    }
+    @media (max-width: 560px) {
+      :root { --gutter: 1.15rem; --section-space: 4.5rem; }
+      .brand { gap: .55rem; }
+      .brand-mark { width: 32px; height: 32px; }
+      .brand-text { font-size: .88rem; }
+      .brand-text small { font-size: .52rem; }
+      h1 { font-size: clamp(3rem, 15vw, 4.7rem); }
+      .hero-role { font-size: 1.08rem; }
+      .hero-art { min-height: 330px; aspect-ratio: .93; }
+      .art-caption { font-size: .55rem; }
+      .hero-meta { flex-direction: column; gap: .65rem; }
+      .about-facts { grid-template-columns: 1fr 1fr; }
+      .fact { min-height: 120px; padding: .85rem; }
+      .fact-num { font-size: 2.1rem; }
+      .expertise-main { grid-template-columns: 1fr; }
+      .skill-card.featured { grid-column: auto; }
+      .tool-panel { display: block; }
+      .experience-item { grid-template-columns: 1fr; gap: .7rem; padding-block: 1.5rem; }
+      .experience-date { display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline; }
+      .experience-date span { margin: 0; }
+      .initiative-grid { grid-template-columns: 1fr; }
+      .initiative:first-child { grid-column: auto; min-height: 300px; }
+      .initiative { min-height: 180px; }
+      .education-item { grid-template-columns: 70px minmax(0, 1fr); gap: .7rem; }
+      .cert-list { grid-template-columns: 1fr; }
+      .cert { min-height: auto; }
+      .language-row { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: .5rem; }
+      .contact-section h2 { font-size: clamp(2.7rem, 13vw, 4.3rem); }
+    }
+  </style>
+  <script>document.documentElement.classList.add('js-ready');</script>
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="site-header" id="topo">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="Lucas Shimada Frenzel, início">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span class="brand-text">Lucas Shimada Frenzel<small>Portfólio profissional</small></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <nav class="nav-links" id="nav-links" aria-label="Navegação principal">
+        <a href="#sobre">Sobre</a>
+        <a href="#competencias">Competências</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#projetos">Atuação</a>
+        <a href="#formacao">Formação</a>
+        <a class="nav-cta" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero container" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Tecnologia · Educação · Pesquisa</div>
+          <h1 id="hero-title">Lucas <span class="name-highlight">Shimada</span> Frenzel.</h1>
+          <p class="hero-role">Instrutor de Educação Profissional no SENAI, conectando desenvolvimento de software, jogos digitais, computação em nuvem e inteligência artificial.</p>
+          <p class="hero-summary">Minha trajetória reúne educação tecnológica, engenharia, logística e pesquisa científica. Meu foco é transformar conceitos complexos em experiências de aprendizagem práticas, acessíveis e conectadas a problemas reais.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#experiencia">Conheça minha trajetória <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+            <a class="button button-secondary" href="https://www.linkedin.com/in/lucas-shimada-frenzel-9a748533" target="_blank" rel="noopener noreferrer">LinkedIn <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4 10 14"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
+          </div>
+          <div class="hero-meta">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> São Paulo, Brasil</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg> Português · Inglês · Alemão básico</span>
+          </div>
+        </div>
+        <div class="hero-art" role="img" aria-label="Composição geométrica abstrata inspirada no movimento De Stijl, com as iniciais LS">
+          <span class="art-caption">Aprender · Criar · Compartilhar</span>
+          <span class="art-cell art-red"></span><span class="art-cell art-blue"></span><span class="art-cell art-white"></span><span class="art-cell art-yellow"></span><span class="art-cell art-ink"></span>
+          <span class="art-cell art-open"><span class="art-initials">LS</span></span>
+          <span class="art-corner" aria-hidden="true"></span>
+          <span class="art-index">LSF / 2026</span>
+          <span class="hero-note">Conhecimento em prática.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sobre" aria-labelledby="sobre-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">01 / Sobre mim</div>
+          <div><h2 id="sobre-title">Tecnologia faz sentido quando amplia possibilidades.</h2><p class="section-intro">Uma carreira construída entre ambientes industriais, investigação científica e educação profissional.</p></div>
+        </div>
+        <div class="about-grid">
+          <div class="about-copy reveal">
+            <p>Sou Instrutor de Educação Profissional no SENAI, onde ensino desenvolvimento de sistemas, programação de jogos digitais, computação em nuvem, inteligência artificial e tecnologias emergentes.</p>
+            <p>Minha experiência profissional atravessa diferentes contextos: planejamento de produção e cadeia de suprimentos, operações internacionais, desenvolvimento web, pesquisa em termohidráulica nuclear e formação técnica. Na Bosch, colaborei com equipes, fornecedores e clientes da Europa, América do Norte e América Latina.</p>
+            <p>Tenho Mestrado em Tecnologia de Reatores Nucleares pela USP, MBA em Administração Industrial pela POLI-USP e especialização em Educação Profissional e Tecnológica. A combinação dessas áreas orienta meu trabalho: aprender continuamente, compartilhar conhecimento e apoiar pessoas na solução de problemas reais.</p>
+          </div>
+          <div class="about-facts reveal" aria-label="Destaques do perfil">
+            <div class="fact"><span class="fact-num">SENAI</span><span class="fact-label">Educação profissional</span><span class="fact-note">Docência técnica e aprendizagem por projetos</span></div>
+            <div class="fact"><span class="fact-num">M.Sc.</span><span class="fact-label">Pesquisa científica</span><span class="fact-note">Tecnologia de reatores nucleares · USP</span></div>
+            <div class="fact"><span class="fact-num">3</span><span class="fact-label">Eixos de tecnologia</span><span class="fact-note">Software, cloud computing e inteligência artificial</span></div>
+            <div class="fact"><span class="fact-num">2019</span><span class="fact-label">Reconhecimento acadêmico</span><span class="fact-note">Melhor aluno da turma de Processos de Manufatura</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="competencias" aria-labelledby="competencias-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">02 / Competências</div>
+          <div><h2 id="competencias-title">Conhecimento técnico com aplicação prática.</h2><p class="section-intro">Áreas de atuação e ferramentas mencionadas no meu perfil profissional.</p></div>
+        </div>
+        <div class="expertise-grid">
+          <div class="expertise-main">
+            <article class="skill-card featured reveal">
+              <span class="skill-number">ÁREA 01</span><h3>Educação e formação técnica</h3><p>Planejamento de aulas, materiais didáticos, avaliações e projetos alinhados às demandas da indústria e ao desenvolvimento profissional dos estudantes.</p>
+              <ul class="tag-list"><li>Aprendizagem por projetos</li><li>Mentoria</li><li>Metodologias ágeis</li><li>Tecnologias educacionais</li></ul>
+            </article>
+            <article class="skill-card red reveal">
+              <span class="skill-number">ÁREA 02</span><h3>Desenvolvimento de software e jogos</h3><p>Desenvolvimento front-end, programação e criação de experiências digitais.</p>
+              <ul class="tag-list"><li>Python</li><li>JavaScript</li><li>React</li><li>HTML/CSS</li><li>Unity</li><li>Blender</li><li>GDevelop</li></ul>
+            </article>
+            <article class="skill-card blue reveal">
+              <span class="skill-number">ÁREA 03</span><h3>Cloud computing e IA</h3><p>Formação em fundamentos de nuvem, inteligência artificial, segurança e automação.</p>
+              <ul class="tag-list"><li>Microsoft Azure</li><li>AI Fundamentals</li><li>SC-900</li><li>n8n</li></ul>
+            </article>
+          </div>
+          <aside class="tool-panel reveal" aria-labelledby="ferramentas-title">
+            <h3 id="ferramentas-title">Ferramentas e outros domínios</h3><p>Um repertório multidisciplinar que conecta tecnologia, análise de dados, processos e pesquisa.</p>
+            <div class="tool-group"><h4>Desenvolvimento e colaboração</h4><ul class="tag-list"><li>GitHub</li><li>VS Code</li><li>Figma</li><li>Miro</li><li>Canva</li></ul></div>
+            <div class="tool-group"><h4>Nuvem e produtividade</h4><ul class="tag-list"><li>Microsoft Azure</li><li>Google Workspace</li><li>Power BI</li><li>Kahoot</li><li>Mentimeter</li></ul></div>
+            <div class="tool-group"><h4>Simulação e fabricação digital</h4><ul class="tag-list"><li>AnyLogic</li><li>FlexSim</li><li>PrusaSlicer</li><li>Drones</li><li>Impressão 3D</li></ul></div>
+            <div class="tool-group"><h4>Indústria e pesquisa</h4><ul class="tag-list"><li>TOTVS Protheus</li><li>ERP/MRP</li><li>EDI</li><li>LabVIEW</li><li>RELAP5/MOD3.3</li><li>Excel</li></ul></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experiencia" aria-labelledby="experiencia-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">03 / Experiência</div>
+          <div><h2 id="experiencia-title">Uma trajetória entre ensino, indústria e ciência.</h2><p class="section-intro">Experiências profissionais organizadas em ordem cronológica inversa. Abra “Ver detalhes” para consultar as principais atividades de cada função.</p></div>
+        </div>
+        <div class="experience-list">
+          <article class="experience-item reveal">
+            <div class="experience-date">Ago. 2025 — atual<span>São Paulo, Brasil</span></div>
+            <div class="experience-body"><div class="experience-company">SENAI Mooca</div><h3>Instrutor de Educação Profissional III</h3><p class="experience-location">Educação profissional · Desenvolvimento de sistemas · Jogos digitais</p><p>Ministro formação técnica em desenvolvimento de sistemas (front-end e back-end), programação de jogos digitais e cursos de educação continuada.</p>
+              <details class="experience-details"><summary>Ver detalhes da atuação</summary><div class="detail-content"><ul><li>Ensino Python, JavaScript, React, computação em nuvem, Microsoft Azure (AZ-900, AI-900 e SC-900) e design de jogos digitais.</li><li>Desenvolvo materiais didáticos, avaliações técnicas e projetos práticos alinhados às demandas profissionais.</li><li>Oriento estudantes no desenvolvimento de competências técnicas, resolução de problemas e habilidades profissionais.</li><li>Integro metodologias ativas e tecnologias emergentes, como IA, cloud computing e automação.</li></ul></div></details>
+              <ul class="experience-tags"><li>Python</li><li>JavaScript</li><li>Azure</li><li>Jogos digitais</li><li>IA</li></ul>
+            </div>
+          </article>
+          <article class="experience-item reveal">
+            <div class="experience-date">Jan. 2023 — ago. 2025<span>São Paulo · Mooca</span></div>
+            <div class="experience-body"><div class="experience-company">SENAI Mooca</div><h3>Instrutor de Educação Profissional II</h3><p>Formação técnica e profissional em logística, tecnologia da informação, desenvolvimento de sistemas, programação de jogos digitais, processos administrativos, Python e desenvolvimento front-end.</p>
+              <details class="experience-details"><summary>Ver detalhes da atuação</summary><div class="detail-content"><ul><li>Ministrei conteúdos de nuvem, programação, ferramentas digitais e preparação para o trabalho.</li><li>Operei e ensinei tecnologias como drones e impressão 3D.</li><li>Atuei na Rede de Mentoria Digital do SENAI, apoiando instrutores na adoção de tecnologias educacionais.</li><li>Contribuí para o curso ProEducador Digital, voltado ao uso de aplicativos Google por educadores do SENAI.</li><li>Elaborei itens de avaliação para o PROVEI 2024 do curso Técnico em Desenvolvimento de Sistemas e conduzi oficinas, apresentações e mentorias.</li></ul></div></details>
+              <ul class="experience-tags"><li>Educação técnica</li><li>Mentoria digital</li><li>Drones</li><li>Impressão 3D</li></ul>
+            </div>
+          </article>
+          <article class="experience-item reveal">
+            <div class="experience-date">Abr. 2022 — jan. 2023<span>São Paulo, Brasil</span></div>
+            <div class="experience-body"><div class="experience-company">Torcomp Ltda.</div><h3>Analista de Planejamento da Produção</h3><p>Planejamento da demanda, programação de pedidos e produção com uso de sistemas EDI e ERP/MRP TOTVS Protheus em fabricante de peças automotivas.</p>
+              <details class="experience-details"><summary>Ver detalhes da atuação</summary><div class="detail-content"><ul><li>Planejei a compra de matérias-primas e acompanhei operações de exportação para clientes nos Estados Unidos.</li><li>Atualizei o cronograma mestre de entregas e acompanhei pedidos planejados versus faturados.</li><li>Emiti e gerenciei ordens de produção, articulando capacidade fabril, demanda e estoques.</li><li>Desenvolvi automações de processos administrativos para reduzir tarefas manuais e apoiar decisões baseadas em dados.</li></ul></div></details>
+              <ul class="experience-tags"><li>PCP</li><li>Supply chain</li><li>TOTVS Protheus</li><li>Automação</li></ul>
+            </div>
+          </article>
+          <article class="experience-item reveal">
+            <div class="experience-date">Ago. 2017 — jul. 2019<span>São Paulo, Brasil</span></div>
+            <div class="experience-body"><div class="experience-company">IPEN — CEN</div><h3>Assistente de Pesquisa em Energia Nuclear</h3><p>Pesquisa em termohidráulica no Centro de Engenharia Nuclear, com foco em fenômenos de circulação natural em sistemas nucleares.</p>
+              <details class="experience-details"><summary>Ver detalhes da pesquisa</summary><div class="detail-content"><ul><li>Participei da montagem, instrumentação e operação de uma instalação experimental de circulação natural.</li><li>Realizei estudos de escoamentos monofásicos e bifásicos e desenvolvi sistemas de aquisição e monitoramento com LabVIEW.</li><li>Contribuí para validar modelos numéricos com o código de simulação termohidráulica RELAP5/MOD3.3.</li><li>Analisei dados experimentais e comparei resultados com simulações computacionais. Pesquisa financiada por bolsa do CNPq.</li></ul></div></details>
+              <ul class="experience-tags"><li>Pesquisa científica</li><li>LabVIEW</li><li>RELAP5</li><li>Análise de dados</li></ul>
+            </div>
+          </article>
+          <article class="experience-item reveal">
+            <div class="experience-date">Jun. 2015 — jun. 2017<span>Brasil</span></div>
+            <div class="experience-body"><div class="experience-company">Sanq Cosméticos Distribuidora</div><h3>Analista de E-commerce</h3><p>Gestão do conteúdo da plataforma de e-commerce, catálogos de produtos, experiência do cliente e campanhas de marketing digital.</p>
+              <details class="experience-details"><summary>Ver detalhes da atuação</summary><div class="detail-content"><ul><li>Implementei melhorias de front-end com HTML, CSS, JavaScript, Bootstrap e React.</li><li>Planejei campanhas digitais, ações em redes sociais e colaboração com criadores de conteúdo e influenciadores.</li><li>Utilizei Google Ads e Google Analytics para acompanhar resultados e otimizar campanhas.</li></ul></div></details>
+              <ul class="experience-tags"><li>E-commerce</li><li>React</li><li>Google Ads</li><li>Analytics</li></ul>
+            </div>
+          </article>
+          <article class="experience-item reveal">
+            <div class="experience-date">Mar. 2013 — jan. 2015<span>São Paulo e região</span></div>
+            <div class="experience-body"><div class="experience-company">Bosch</div><h3>Analista Júnior de Planejamento da Produção</h3><p>Análise da demanda, planejamento de produção, gestão de carteira de pedidos e acompanhamento de entregas com sistemas ERP/MRP.</p>
+              <details class="experience-details"><summary>Ver detalhes da atuação</summary><div class="detail-content"><ul><li>Coordenei rotinas com Produção, Supply Chain, Compras e Comercial e reuniões com fornecedores e clientes internacionais da Europa, América do Norte e América Latina.</li><li>Acompanhei estoques em processo e de produtos acabados, relatórios, indicadores e análises de KPIs com Excel.</li><li>Apoiei atividades de importação e exportação, mapeamento logístico e melhorias contínuas com Kaizen e PDCA.</li><li>Participei da configuração de parâmetros de planejamento, incluindo lote econômico, estoque de segurança, ponto de reposição e lead time de fornecedores.</li></ul></div></details>
+              <ul class="experience-tags"><li>Planejamento</li><li>ERP/MRP</li><li>Importação e exportação</li><li>Kaizen</li></ul>
+            </div>
+          </article>
+          <article class="experience-item reveal">
+            <div class="experience-date">Out. 2011 — dez. 2012<span>São Paulo e região</span></div>
+            <div class="experience-body"><div class="experience-company">Bosch</div><h3>Estagiário de Logística</h3><p>Suporte às operações internacionais de importação e exportação, acompanhamento logístico e rotinas de planejamento da cadeia de suprimentos.</p>
+              <details class="experience-details"><summary>Ver detalhes da atuação</summary><div class="detail-content"><ul><li>Coordenei acompanhamentos com despachantes aduaneiros, agentes de carga e provedores logísticos.</li><li>Preparei documentos de comércio exterior, incluindo pedidos de compra, faturas comerciais e packing lists.</li><li>Apoiei o monitoramento de KPIs, a manutenção de dados mestres em ERP e a implantação de processos Milk Run e Kanban.</li></ul></div></details>
+              <ul class="experience-tags"><li>Logística internacional</li><li>Milk Run</li><li>Kanban</li><li>ERP</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projetos" aria-labelledby="projetos-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">04 / Atuação em destaque</div>
+          <div><h2 id="projetos-title">Conhecimento aplicado a contextos reais.</h2><p class="section-intro">Iniciativas profissionais descritas no perfil, reunindo inovação educacional e investigação científica.</p></div>
+        </div>
+        <div class="initiative-grid">
+          <article class="initiative reveal">
+            <div><span class="initiative-index">DESTAQUE / 01</span><h3>Mentoria e inovação na educação digital</h3><p>Participação na Rede de Mentoria Digital do SENAI, apoiando a adoção de tecnologias educacionais e estratégias de aprendizagem digital. Contribuição para o desenvolvimento do curso ProEducador Digital, com foco em aplicativos Google para educadores.</p></div>
+            <div class="initiative-foot">EDUCAÇÃO PROFISSIONAL · TECNOLOGIA EDUCACIONAL</div>
+          </article>
+          <article class="initiative reveal">
+            <div><span class="initiative-index">DESTAQUE / 02</span><h3>Avaliação e desenvolvimento de cursos</h3><p>Elaboração de itens de avaliação para o PROVEI 2024, apoiando o processo avaliativo do curso Técnico em Desenvolvimento de Sistemas, além de oficinas, apresentações técnicas e atividades de aprendizagem por projetos.</p></div></article>
+          <article class="initiative reveal">
+            <div><span class="initiative-index">DESTAQUE / 03</span><h3>Pesquisa experimental em termohidráulica</h3><p>Estudos de circulação natural em sistemas nucleares, aquisição de dados com LabVIEW e validação de modelos numéricos usando RELAP5/MOD3.3 no IPEN.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="formacao" aria-labelledby="formacao-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">05 / Formação</div>
+          <div><h2 id="formacao-title">Aprendizado contínuo, de diferentes perspectivas.</h2><p class="section-intro">Formação acadêmica listada no perfil profissional.</p></div>
+        </div>
+        <div class="education-grid">
+          <div class="education-list">
+            <article class="education-item reveal"><div class="education-year">2019–2023</div><div><h3>Mestrado em Tecnologia de Reatores Nucleares</h3><p>Universidade de São Paulo (USP) · Tecnologia nuclear e pesquisa termohidráulica.</p></div></article>
+            <article class="education-item reveal"><div class="education-year">2023–2024</div><div><h3>Especialização em Educação Profissional e Tecnológica</h3><p>Instituto Federal do Espírito Santo (IFES).</p></div></article>
+            <article class="education-item reveal"><div class="education-year">2022–2024</div><div><h3>MBA em Administração Industrial</h3><p>Escola Politécnica da Universidade de São Paulo (POLI-USP).</p></div></article>
+            <article class="education-item reveal"><div class="education-year">2024–2026</div><div><h3>Tecnólogo em Desenvolvimento de Jogos Digitais</h3><p>Universidade Anhembi Morumbi.</p></div></article>
+            <article class="education-item reveal"><div class="education-year">2025</div><div><h3>Licenciatura em Matemática</h3><p>UNINTER Centro Universitário Internacional.</p></div></article>
+          </div>
+          <aside class="education-note reveal">
+            <span class="note-symbol" aria-hidden="true">01</span><h3>Ciência, indústria e educação no mesmo repertório.</h3><p>O percurso acadêmico reúne pesquisa em tecnologia nuclear, gestão industrial, formação profissional e desenvolvimento de jogos digitais.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certificacoes" aria-labelledby="certificacoes-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow">06 / Certificações e idiomas</div>
+          <div><h2 id="certificacoes-title">Fundamentos técnicos e reconhecimento acadêmico.</h2><p class="section-intro">Certificações e reconhecimentos destacados no documento de perfil.</p></div>
+        </div>
+        <div class="cert-layout">
+          <article class="award reveal"><span class="award-label">Reconhecimento · 2019</span><h3>Melhor aluno da turma de Tecnologia em Processos de Manufatura.</h3><p>Reconhecimento da turma concluinte de 2019 na área de Mechanical Engineering Technology — Manufacturing Processes, conforme informado no perfil.</p></article>
+          <div class="cert-list">
+            <article class="cert reveal"><h3>Microsoft Azure Fundamentals — AZ-900</h3><p>Fundamentos de computação em nuvem Microsoft Azure.</p></article>
+            <article class="cert reveal"><h3>Microsoft AI Fundamentals — AI-900</h3><p>Fundamentos de inteligência artificial no Azure.</p></article>
+            <article class="cert reveal"><h3>Microsoft Security, Compliance, and Identity Fundamentals — SC-900</h3><p>Conceitos básicos de segurança, conformidade e identidade.</p></article>
+            <article class="cert reveal"><h3>Build and Deploy Machine Learning Solutions on Vertex AI</h3><p>Google Cloud · Soluções de machine learning.</p></article>
+            <article class="cert reveal"><h3>Google Workspace for Education</h3><p>Aplicações Google no contexto educacional.</p></article>
+            <article class="cert reveal"><h3>Google Cloud Engineer — implantação de serviços em nuvem</h3><p>Conteúdo de implantação de serviços em nuvem descrito no perfil.</p></article>
+            <article class="cert reveal"><h3>Build and Secure Networks in Google Cloud</h3><p>Redes e segurança em ambientes Google Cloud.</p></article>
+          </div>
+        </div>
+        <div class="language-row reveal" aria-label="Idiomas">
+          <div class="language"><strong>Português</strong><span>Nativo ou bilíngue</span></div>
+          <div class="language"><strong>Inglês</strong><span>Proficiência profissional completa</span></div>
+          <div class="language"><strong>Alemão</strong><span>Conhecimento elementar</span></div>
+        </div>
+        <p class="muted" style="font-size:.75rem;margin-top:1rem">Os nomes das certificações e cursos foram preservados ou traduzidos a partir das informações apresentadas no perfil. Consulte o portfólio profissional para detalhes adicionais.</p>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contato" aria-labelledby="contato-title">
+      <div class="container contact-grid">
+        <div class="reveal">
+          <div class="eyebrow">07 / Contato</div>
+          <h2 id="contato-title">Vamos trocar ideias e construir conhecimento?</h2>
+          <p class="contact-copy">Para conversas sobre educação profissional, tecnologia, desenvolvimento de software, jogos digitais, nuvem, inteligência artificial ou pesquisa, entre em contato pelos canais profissionais.</p>
+          <div class="contact-email-tools"><a class="button button-primary" href="mailto:lucasfrenzel@yahoo.com.br">Enviar e-mail <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></a><button class="button" id="copy-email" type="button" data-email="lucasfrenzel@yahoo.com.br">Copiar e-mail</button></div>
+        </div>
+        <div class="contact-links reveal">
+          <a class="contact-link" href="mailto:lucasfrenzel@yahoo.com.br"><span>lucasfrenzel@yahoo.com.br</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg></a>
+          <a class="contact-link" href="https://www.linkedin.com/in/lucas-shimada-frenzel-9a748533" target="_blank" rel="noopener noreferrer"><span>LinkedIn / Lucas Shimada Frenzel</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4 10 14"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
+          <a class="contact-link" href="https://www.credly.com/users/lucas-frenzel" target="_blank" rel="noopener noreferrer"><span>Credly / Portfólio de credenciais</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4 10 14"/><path d="M18 13v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6"/></svg></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner"><span class="footer-mark"><span aria-hidden="true"></span> Lucas Shimada Frenzel</span><span>Portfólio profissional · <span id="current-year">2026</span></span><a href="#topo">Voltar ao início ↑</a></div>
+  </footer>
+  <a class="back-top" href="#topo" aria-label="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 7-7 7 7M12 5v14"/></svg></a>
+  <div class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const menuButton = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('#nav-links');
+      const toast = document.querySelector('.toast');
+      let toastTimeout;
+
+      const closeMenu = () => {
+        nav.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Abrir menu');
+        document.body.classList.remove('menu-open');
+      };
+
+      menuButton.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        menuButton.setAttribute('aria-expanded', String(isOpen));
+        menuButton.setAttribute('aria-label', isOpen ? 'Fechar menu' : 'Abrir menu');
+        document.body.classList.toggle('menu-open', isOpen);
+      });
+      nav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenu(); });
+
+      const showToast = message => {
+        toast.textContent = message;
+        toast.classList.add('visible');
+        window.clearTimeout(toastTimeout);
+        toastTimeout = window.setTimeout(() => toast.classList.remove('visible'), 2600);
+      };
+      document.querySelector('#copy-email').addEventListener('click', async event => {
+        const email = event.currentTarget.dataset.email;
+        try {
+          await navigator.clipboard.writeText(email);
+          showToast('E-mail copiado para a área de transferência.');
+        } catch {
+          const temporaryInput = document.createElement('textarea');
+          temporaryInput.value = email;
+          temporaryInput.setAttribute('readonly', '');
+          temporaryInput.style.position = 'fixed';
+          temporaryInput.style.opacity = '0';
+          document.body.appendChild(temporaryInput);
+          temporaryInput.select();
+          const copied = document.execCommand('copy');
+          temporaryInput.remove();
+          showToast(copied ? 'E-mail copiado para a área de transferência.' : 'E-mail: ' + email);
+        }
+      });
+
+      const revealItems = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+        revealItems.forEach(item => observer.observe(item));
+        // Failsafe: keeps content visible if a user jumps past an observed section.
+        window.setTimeout(() => revealItems.forEach(item => item.classList.add('is-visible')), 2200);
+      } else {
+        revealItems.forEach(item => item.classList.add('is-visible'));
+      }
+
+      const backTop = document.querySelector('.back-top');
+      const updateBackTop = () => backTop.classList.toggle('visible', window.scrollY > 600);
+      window.addEventListener('scroll', updateBackTop, { passive: true });
+      updateBackTop();
+
+      const sections = document.querySelectorAll('main section[id]');
+      const navItems = nav.querySelectorAll('a[href^="#"]');
+      if ('IntersectionObserver' in window) {
+        const sectionObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            navItems.forEach(item => {
+              if (item.getAttribute('href') === '#' + entry.target.id) item.setAttribute('aria-current', 'location');
+              else item.removeAttribute('aria-current');
+            });
+          });
+        }, { rootMargin: '-25% 0px -65% 0px' });
+        sections.forEach(section => sectionObserver.observe(section));
+      }
+      document.querySelector('#current-year').textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
